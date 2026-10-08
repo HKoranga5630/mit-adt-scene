@@ -2,9 +2,9 @@ import { Code2, Music2, Palette, HeartHandshake, Camera, Trophy, ArrowRight, Use
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import type { Club, CollegeEvent } from '@/data/hub';
-const icons = { code:Code2, music:Music2, palette:Palette, heart:HeartHandshake, camera:Camera, sport:Trophy };
+export const clubIcons = { code:Code2, music:Music2, palette:Palette, heart:HeartHandshake, camera:Camera, sport:Trophy };
 export function ClubCard({club}:{club:Club}) {
- const Icon=icons[club.icon];
+ const Icon=clubIcons[club.icon];
  return <article className="club-card"><div className="club-icon" data-tone={club.tone}><Icon size={27} strokeWidth={1.7}/></div><h3 className="club-title">{club.name}</h3><span className="category-badge" data-category={club.category}>{club.category}</span><p className="club-description">{club.description}</p><div className="club-footer"><span className="club-members"><Users size={13}/>{club.members} members</span><Dialog><DialogTrigger asChild><Button variant="link" size="sm" className="px-0 text-xs">View Club <ArrowRight size={13}/></Button></DialogTrigger><DialogContent className="max-h-[90dvh] overflow-y-auto w-[calc(100%-32px)] rounded-lg"><DialogHeader><DialogTitle>{club.name}</DialogTitle><DialogDescription>{club.category} · Sample club</DialogDescription></DialogHeader><div className="club-icon mb-0" data-tone={club.tone}><Icon size={28}/></div><p className="text-sm leading-7 text-muted-foreground">{club.about}</p><p className="text-xs text-muted-foreground flex gap-2 items-center"><Users size={15}/>{club.members} sample members</p><Button disabled>Join Club</Button><p className="text-xs text-muted-foreground text-center">Club membership is not available yet.</p></DialogContent></Dialog></div></article>;
 }
 export function EventCard({event}:{event:CollegeEvent}) {
