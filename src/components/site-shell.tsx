@@ -1,10 +1,11 @@
 import { Link, useRouterState } from '@tanstack/react-router';
 import { useState } from 'react';
-import { GraduationCap, Menu, X, ArrowUpRight, MapPin } from 'lucide-react';
+import { Menu, X, ArrowUpRight, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import officialLogo from '@/assets/mit-adt-official-logo.png.asset.json';
 
 export function UniversityBrand() {
- return <div className="brand"><span className="brand-mark"><GraduationCap size={29} strokeWidth={1.7}/></span><div className="min-w-0"><div className="brand-title">MIT ADT <span className="font-medium">University</span></div><div className="brand-subtitle">Art, Design & Technology University</div></div></div>;
+ return <div className="brand"><img className="brand-mark" src={officialLogo.url} alt="Official MIT ADT University logo" width={863} height={860}/><div className="min-w-0"><div className="brand-title">MIT ADT <span className="font-medium">University</span></div><div className="brand-subtitle">Art, Design & Technology University</div></div></div>;
 }
 export function SiteHeader() {
  const [open,setOpen]=useState(false);

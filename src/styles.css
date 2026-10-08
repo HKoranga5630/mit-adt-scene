@@ -46,7 +46,7 @@
 .site-header { height: 88px; background: var(--card); border-bottom: 1px solid var(--border); }
 .header-inner { height: 100%; display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 52px; }
 .brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
-.brand-mark { display: grid; place-items: center; width: 47px; height: 47px; border-radius: 6px; background: var(--accent); color: var(--primary); flex-shrink: 0; }
+.brand-mark { display: block; width: 47px; height: auto; aspect-ratio: 863 / 860; object-fit: contain; flex-shrink: 0; }
 .brand-title { font-family: var(--font-display); font-weight: 800; font-size: 20px; line-height: 1.3; }
 .brand-subtitle { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.6px; color: var(--muted-foreground); margin-top: 3px; }
 .desktop-nav { display: flex; gap: 32px; align-items: center; height: 100%; }
@@ -157,7 +157,7 @@
  .site-container { width: calc(100% - 36px); }
  .site-header { height: 73px; }
  .header-inner { grid-template-columns: minmax(0,1fr) auto; gap: 12px; }
- .brand-mark { height: 39px; width: 39px; }
+ .brand-mark { width: 39px; }
  .brand-title { font-size: 17px; }
  .brand-subtitle { font-size: 7px; letter-spacing: .8px; }
  .desktop-nav,.header-actions { display: none; }
