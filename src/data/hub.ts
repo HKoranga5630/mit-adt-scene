@@ -19,3 +19,41 @@ export const events: CollegeEvent[]=[
  {id:'art-workshop',name:'Artistry: Creative Workshop',category:'Arts & Design',date:'November 2, 2026',day:'02',month:'NOV',time:'11:00 AM – 2:00 PM',venue:'School of Fine Arts Studio',club:'Canvas Art Society',image:arts,description:'Take a creative break and discover your artistic side. Experiment with colors and techniques in a welcoming workshop for beginners and experienced artists alike.'},
 ];
 export function pageHead(title: string, description: string) {return {meta:[{title:`${title} | MIT ADT University Club & Event Hub`},{name:'description',content:description},{property:'og:title',content:`${title} | MIT ADT University Club & Event Hub`},{property:'og:description',content:description},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}]};}
+
+// ---- Sample dashboard content (illustrative only; replace with a real data service later) ----
+export const clubById=(id:string)=>clubs.find(c=>c.id===id);
+export const eventById=(id:string)=>events.find(e=>e.id===id);
+export const clubByName=(name:string)=>clubs.find(c=>c.name===name);
+export const sampleStudent={registeredEventIds:['tech-fest','rhythm-night'],joinedClubIds:['tech','music','photo']};
+export interface HubNotification{id:string;title:string;body:string;time:string;kind:'event'|'club'|'system'}
+export const notifications:HubNotification[]=[
+ {id:'n1',title:'TechFest 2026 venue confirmed',body:'TechFest 2026 will be held at the School of Engineering Auditorium.',time:'2 hours ago',kind:'event'},
+ {id:'n2',title:'New announcement from Rhythm Music Club',body:'Auditions for the campus band open next week.',time:'Yesterday',kind:'club'},
+ {id:'n3',title:'Registration closing soon',body:'Registration for Artistry: Creative Workshop closes on October 30.',time:'2 days ago',kind:'event'},
+ {id:'n4',title:'Welcome to the Event Hub',body:'Explore clubs and events happening across MIT ADT University.',time:'1 week ago',kind:'system'},
+];
+export const announcements=[
+ {id:'a1',title:'TechFest volunteers needed',body:'Members interested in volunteering for TechFest 2026 can share their names with the core team.',date:'October 8, 2026'},
+ {id:'a2',title:'Weekly coding session moved',body:'This week’s coding session moves to Thursday, 4:00 PM in Lab 3.',date:'October 5, 2026'},
+];
+export interface Registration{id:string;student:string;email:string;event:string;registeredOn:string}
+export const registrations:Registration[]=[
+ {id:'r1',student:'Aarav Sharma',email:'aarav.s@example.edu',event:'TechFest 2026',registeredOn:'Oct 2, 2026'},
+ {id:'r2',student:'Diya Patil',email:'diya.p@example.edu',event:'TechFest 2026',registeredOn:'Oct 3, 2026'},
+ {id:'r3',student:'Rohan Kulkarni',email:'rohan.k@example.edu',event:'TechFest 2026',registeredOn:'Oct 4, 2026'},
+ {id:'r4',student:'Sneha Joshi',email:'sneha.j@example.edu',event:'TechFest 2026',registeredOn:'Oct 6, 2026'},
+];
+export const pendingClubs=[
+ {id:'p1',name:'Robotics & Drone Club',category:'Technology' as Category,representative:'Kunal Deshmukh',submitted:'Oct 6, 2026'},
+ {id:'p2',name:'Literary Circle',category:'Cultural' as Category,representative:'Ananya Rao',submitted:'Oct 4, 2026'},
+ {id:'p3',name:'Green Campus Initiative',category:'Community' as Category,representative:'Meera Iyer',submitted:'Oct 1, 2026'},
+];
+export const hubUsers=[
+ {id:'u1',name:'Aarav Sharma',email:'aarav.s@example.edu',role:'Student',status:'Active'},
+ {id:'u2',name:'Diya Patil',email:'diya.p@example.edu',role:'Student',status:'Active'},
+ {id:'u3',name:'Kunal Deshmukh',email:'kunal.d@example.edu',role:'Club Representative',status:'Active'},
+ {id:'u4',name:'Ananya Rao',email:'ananya.r@example.edu',role:'Club Representative',status:'Pending'},
+ {id:'u5',name:'Rohan Kulkarni',email:'rohan.k@example.edu',role:'Student',status:'Active'},
+];
+export const participation=[{event:'TechFest 2026',registered:184,capacity:250},{event:'Rhythm Night',registered:212,capacity:300},{event:'Artistry: Creative Workshop',registered:46,capacity:60}];
+export const adminStats={students:2480,clubs:clubs.length,events:events.length,registrations:participation.reduce((s,p)=>s+p.registered,0)};

@@ -14,6 +14,23 @@ import { Route as ClubsRouteImport } from './routes/clubs'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminApprovalsRouteImport } from './routes/admin.approvals'
+import { Route as AdminClubsRouteImport } from './routes/admin.clubs'
+import { Route as AdminEventsRouteImport } from './routes/admin.events'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as ClubIndexRouteImport } from './routes/club.index'
+import { Route as ClubAnnouncementsRouteImport } from './routes/club.announcements'
+import { Route as ClubCreateEventRouteImport } from './routes/club.create-event'
+import { Route as ClubEventsRouteImport } from './routes/club.events'
+import { Route as ClubRegistrationsRouteImport } from './routes/club.registrations'
+import { Route as ClubsClubIdRouteImport } from './routes/clubs_.$clubId'
+import { Route as EventsEventIdRouteImport } from './routes/events_.$eventId'
+import { Route as StudentIndexRouteImport } from './routes/student.index'
+import { Route as StudentClubsRouteImport } from './routes/student.clubs'
+import { Route as StudentEventsRouteImport } from './routes/student.events'
+import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +57,91 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminApprovalsRoute = AdminApprovalsRouteImport.update({
+  id: '/admin/approvals',
+  path: '/admin/approvals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminClubsRoute = AdminClubsRouteImport.update({
+  id: '/admin/clubs',
+  path: '/admin/clubs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEventsRoute = AdminEventsRouteImport.update({
+  id: '/admin/events',
+  path: '/admin/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/admin/reports',
+  path: '/admin/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubIndexRoute = ClubIndexRouteImport.update({
+  id: '/club/',
+  path: '/club/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubAnnouncementsRoute = ClubAnnouncementsRouteImport.update({
+  id: '/club/announcements',
+  path: '/club/announcements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubCreateEventRoute = ClubCreateEventRouteImport.update({
+  id: '/club/create-event',
+  path: '/club/create-event',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubEventsRoute = ClubEventsRouteImport.update({
+  id: '/club/events',
+  path: '/club/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubRegistrationsRoute = ClubRegistrationsRouteImport.update({
+  id: '/club/registrations',
+  path: '/club/registrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubsClubIdRoute = ClubsClubIdRouteImport.update({
+  id: '/clubs_/$clubId',
+  path: '/clubs/$clubId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEventIdRoute = EventsEventIdRouteImport.update({
+  id: '/events_/$eventId',
+  path: '/events/$eventId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentIndexRoute = StudentIndexRouteImport.update({
+  id: '/student/',
+  path: '/student/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentClubsRoute = StudentClubsRouteImport.update({
+  id: '/student/clubs',
+  path: '/student/clubs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentEventsRoute = StudentEventsRouteImport.update({
+  id: '/student/events',
+  path: '/student/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
+  id: '/student/notifications',
+  path: '/student/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +149,23 @@ export interface FileRoutesByFullPath {
   '/events': typeof EventsRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/clubs': typeof AdminClubsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/club/announcements': typeof ClubAnnouncementsRoute
+  '/club/create-event': typeof ClubCreateEventRoute
+  '/club/events': typeof ClubEventsRoute
+  '/club/registrations': typeof ClubRegistrationsRoute
+  '/clubs/$clubId': typeof ClubsClubIdRoute
+  '/events/$eventId': typeof EventsEventIdRoute
+  '/student/clubs': typeof StudentClubsRoute
+  '/student/events': typeof StudentEventsRoute
+  '/student/notifications': typeof StudentNotificationsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/club/': typeof ClubIndexRoute
+  '/student/': typeof StudentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +173,23 @@ export interface FileRoutesByTo {
   '/events': typeof EventsRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/clubs': typeof AdminClubsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/club/announcements': typeof ClubAnnouncementsRoute
+  '/club/create-event': typeof ClubCreateEventRoute
+  '/club/events': typeof ClubEventsRoute
+  '/club/registrations': typeof ClubRegistrationsRoute
+  '/clubs/$clubId': typeof ClubsClubIdRoute
+  '/events/$eventId': typeof EventsEventIdRoute
+  '/student/clubs': typeof StudentClubsRoute
+  '/student/events': typeof StudentEventsRoute
+  '/student/notifications': typeof StudentNotificationsRoute
+  '/admin': typeof AdminIndexRoute
+  '/club': typeof ClubIndexRoute
+  '/student': typeof StudentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +198,97 @@ export interface FileRoutesById {
   '/events': typeof EventsRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/clubs': typeof AdminClubsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/club/announcements': typeof ClubAnnouncementsRoute
+  '/club/create-event': typeof ClubCreateEventRoute
+  '/club/events': typeof ClubEventsRoute
+  '/club/registrations': typeof ClubRegistrationsRoute
+  '/clubs_/$clubId': typeof ClubsClubIdRoute
+  '/events_/$eventId': typeof EventsEventIdRoute
+  '/student/clubs': typeof StudentClubsRoute
+  '/student/events': typeof StudentEventsRoute
+  '/student/notifications': typeof StudentNotificationsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/club/': typeof ClubIndexRoute
+  '/student/': typeof StudentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/clubs' | '/events' | '/login' | '/signup'
+  fullPaths:
+    | '/'
+    | '/clubs'
+    | '/events'
+    | '/login'
+    | '/signup'
+    | '/admin/approvals'
+    | '/admin/clubs'
+    | '/admin/events'
+    | '/admin/reports'
+    | '/admin/users'
+    | '/club/announcements'
+    | '/club/create-event'
+    | '/club/events'
+    | '/club/registrations'
+    | '/clubs/$clubId'
+    | '/events/$eventId'
+    | '/student/clubs'
+    | '/student/events'
+    | '/student/notifications'
+    | '/admin/'
+    | '/club/'
+    | '/student/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clubs' | '/events' | '/login' | '/signup'
-  id: '__root__' | '/' | '/clubs' | '/events' | '/login' | '/signup'
+  to:
+    | '/'
+    | '/clubs'
+    | '/events'
+    | '/login'
+    | '/signup'
+    | '/admin/approvals'
+    | '/admin/clubs'
+    | '/admin/events'
+    | '/admin/reports'
+    | '/admin/users'
+    | '/club/announcements'
+    | '/club/create-event'
+    | '/club/events'
+    | '/club/registrations'
+    | '/clubs/$clubId'
+    | '/events/$eventId'
+    | '/student/clubs'
+    | '/student/events'
+    | '/student/notifications'
+    | '/admin'
+    | '/club'
+    | '/student'
+  id:
+    | '__root__'
+    | '/'
+    | '/clubs'
+    | '/events'
+    | '/login'
+    | '/signup'
+    | '/admin/approvals'
+    | '/admin/clubs'
+    | '/admin/events'
+    | '/admin/reports'
+    | '/admin/users'
+    | '/club/announcements'
+    | '/club/create-event'
+    | '/club/events'
+    | '/club/registrations'
+    | '/clubs_/$clubId'
+    | '/events_/$eventId'
+    | '/student/clubs'
+    | '/student/events'
+    | '/student/notifications'
+    | '/admin/'
+    | '/club/'
+    | '/student/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +297,23 @@ export interface RootRouteChildren {
   EventsRoute: typeof EventsRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
+  AdminApprovalsRoute: typeof AdminApprovalsRoute
+  AdminClubsRoute: typeof AdminClubsRoute
+  AdminEventsRoute: typeof AdminEventsRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  ClubAnnouncementsRoute: typeof ClubAnnouncementsRoute
+  ClubCreateEventRoute: typeof ClubCreateEventRoute
+  ClubEventsRoute: typeof ClubEventsRoute
+  ClubRegistrationsRoute: typeof ClubRegistrationsRoute
+  ClubsClubIdRoute: typeof ClubsClubIdRoute
+  EventsEventIdRoute: typeof EventsEventIdRoute
+  StudentClubsRoute: typeof StudentClubsRoute
+  StudentEventsRoute: typeof StudentEventsRoute
+  StudentNotificationsRoute: typeof StudentNotificationsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  ClubIndexRoute: typeof ClubIndexRoute
+  StudentIndexRoute: typeof StudentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +353,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/approvals': {
+      id: '/admin/approvals'
+      path: '/admin/approvals'
+      fullPath: '/admin/approvals'
+      preLoaderRoute: typeof AdminApprovalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/clubs': {
+      id: '/admin/clubs'
+      path: '/admin/clubs'
+      fullPath: '/admin/clubs'
+      preLoaderRoute: typeof AdminClubsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/events': {
+      id: '/admin/events'
+      path: '/admin/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/admin/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/': {
+      id: '/club/'
+      path: '/club'
+      fullPath: '/club/'
+      preLoaderRoute: typeof ClubIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/announcements': {
+      id: '/club/announcements'
+      path: '/club/announcements'
+      fullPath: '/club/announcements'
+      preLoaderRoute: typeof ClubAnnouncementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/create-event': {
+      id: '/club/create-event'
+      path: '/club/create-event'
+      fullPath: '/club/create-event'
+      preLoaderRoute: typeof ClubCreateEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/events': {
+      id: '/club/events'
+      path: '/club/events'
+      fullPath: '/club/events'
+      preLoaderRoute: typeof ClubEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/registrations': {
+      id: '/club/registrations'
+      path: '/club/registrations'
+      fullPath: '/club/registrations'
+      preLoaderRoute: typeof ClubRegistrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clubs_/$clubId': {
+      id: '/clubs_/$clubId'
+      path: '/clubs/$clubId'
+      fullPath: '/clubs/$clubId'
+      preLoaderRoute: typeof ClubsClubIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events_/$eventId': {
+      id: '/events_/$eventId'
+      path: '/events/$eventId'
+      fullPath: '/events/$eventId'
+      preLoaderRoute: typeof EventsEventIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/': {
+      id: '/student/'
+      path: '/student'
+      fullPath: '/student/'
+      preLoaderRoute: typeof StudentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/clubs': {
+      id: '/student/clubs'
+      path: '/student/clubs'
+      fullPath: '/student/clubs'
+      preLoaderRoute: typeof StudentClubsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/events': {
+      id: '/student/events'
+      path: '/student/events'
+      fullPath: '/student/events'
+      preLoaderRoute: typeof StudentEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/notifications': {
+      id: '/student/notifications'
+      path: '/student/notifications'
+      fullPath: '/student/notifications'
+      preLoaderRoute: typeof StudentNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +481,23 @@ const rootRouteChildren: RootRouteChildren = {
   EventsRoute: EventsRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
+  AdminApprovalsRoute: AdminApprovalsRoute,
+  AdminClubsRoute: AdminClubsRoute,
+  AdminEventsRoute: AdminEventsRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  ClubAnnouncementsRoute: ClubAnnouncementsRoute,
+  ClubCreateEventRoute: ClubCreateEventRoute,
+  ClubEventsRoute: ClubEventsRoute,
+  ClubRegistrationsRoute: ClubRegistrationsRoute,
+  ClubsClubIdRoute: ClubsClubIdRoute,
+  EventsEventIdRoute: EventsEventIdRoute,
+  StudentClubsRoute: StudentClubsRoute,
+  StudentEventsRoute: StudentEventsRoute,
+  StudentNotificationsRoute: StudentNotificationsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  ClubIndexRoute: ClubIndexRoute,
+  StudentIndexRoute: StudentIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
