@@ -25,6 +25,8 @@ import { Route as ClubAnnouncementsRouteImport } from './routes/club.announcemen
 import { Route as ClubCreateEventRouteImport } from './routes/club.create-event'
 import { Route as ClubEventsRouteImport } from './routes/club.events'
 import { Route as ClubRegistrationsRouteImport } from './routes/club.registrations'
+import { Route as ClubsClubIdRouteImport } from './routes/clubs_.$clubId'
+import { Route as EventsEventIdRouteImport } from './routes/events_.$eventId'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
 import { Route as StudentClubsRouteImport } from './routes/student.clubs'
 import { Route as StudentEventsRouteImport } from './routes/student.events'
@@ -110,6 +112,16 @@ const ClubRegistrationsRoute = ClubRegistrationsRouteImport.update({
   path: '/club/registrations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClubsClubIdRoute = ClubsClubIdRouteImport.update({
+  id: '/clubs_/$clubId',
+  path: '/clubs/$clubId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEventIdRoute = EventsEventIdRouteImport.update({
+  id: '/events_/$eventId',
+  path: '/events/$eventId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudentIndexRoute = StudentIndexRouteImport.update({
   id: '/student/',
   path: '/student/',
@@ -146,6 +158,8 @@ export interface FileRoutesByFullPath {
   '/club/create-event': typeof ClubCreateEventRoute
   '/club/events': typeof ClubEventsRoute
   '/club/registrations': typeof ClubRegistrationsRoute
+  '/clubs/$clubId': typeof ClubsClubIdRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/student/clubs': typeof StudentClubsRoute
   '/student/events': typeof StudentEventsRoute
   '/student/notifications': typeof StudentNotificationsRoute
@@ -168,6 +182,8 @@ export interface FileRoutesByTo {
   '/club/create-event': typeof ClubCreateEventRoute
   '/club/events': typeof ClubEventsRoute
   '/club/registrations': typeof ClubRegistrationsRoute
+  '/clubs/$clubId': typeof ClubsClubIdRoute
+  '/events/$eventId': typeof EventsEventIdRoute
   '/student/clubs': typeof StudentClubsRoute
   '/student/events': typeof StudentEventsRoute
   '/student/notifications': typeof StudentNotificationsRoute
@@ -191,6 +207,8 @@ export interface FileRoutesById {
   '/club/create-event': typeof ClubCreateEventRoute
   '/club/events': typeof ClubEventsRoute
   '/club/registrations': typeof ClubRegistrationsRoute
+  '/clubs_/$clubId': typeof ClubsClubIdRoute
+  '/events_/$eventId': typeof EventsEventIdRoute
   '/student/clubs': typeof StudentClubsRoute
   '/student/events': typeof StudentEventsRoute
   '/student/notifications': typeof StudentNotificationsRoute
@@ -215,6 +233,8 @@ export interface FileRouteTypes {
     | '/club/create-event'
     | '/club/events'
     | '/club/registrations'
+    | '/clubs/$clubId'
+    | '/events/$eventId'
     | '/student/clubs'
     | '/student/events'
     | '/student/notifications'
@@ -237,6 +257,8 @@ export interface FileRouteTypes {
     | '/club/create-event'
     | '/club/events'
     | '/club/registrations'
+    | '/clubs/$clubId'
+    | '/events/$eventId'
     | '/student/clubs'
     | '/student/events'
     | '/student/notifications'
@@ -259,6 +281,8 @@ export interface FileRouteTypes {
     | '/club/create-event'
     | '/club/events'
     | '/club/registrations'
+    | '/clubs_/$clubId'
+    | '/events_/$eventId'
     | '/student/clubs'
     | '/student/events'
     | '/student/notifications'
@@ -282,6 +306,8 @@ export interface RootRouteChildren {
   ClubCreateEventRoute: typeof ClubCreateEventRoute
   ClubEventsRoute: typeof ClubEventsRoute
   ClubRegistrationsRoute: typeof ClubRegistrationsRoute
+  ClubsClubIdRoute: typeof ClubsClubIdRoute
+  EventsEventIdRoute: typeof EventsEventIdRoute
   StudentClubsRoute: typeof StudentClubsRoute
   StudentEventsRoute: typeof StudentEventsRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
@@ -404,6 +430,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClubRegistrationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clubs_/$clubId': {
+      id: '/clubs_/$clubId'
+      path: '/clubs/$clubId'
+      fullPath: '/clubs/$clubId'
+      preLoaderRoute: typeof ClubsClubIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events_/$eventId': {
+      id: '/events_/$eventId'
+      path: '/events/$eventId'
+      fullPath: '/events/$eventId'
+      preLoaderRoute: typeof EventsEventIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/student/': {
       id: '/student/'
       path: '/student'
@@ -450,6 +490,8 @@ const rootRouteChildren: RootRouteChildren = {
   ClubCreateEventRoute: ClubCreateEventRoute,
   ClubEventsRoute: ClubEventsRoute,
   ClubRegistrationsRoute: ClubRegistrationsRoute,
+  ClubsClubIdRoute: ClubsClubIdRoute,
+  EventsEventIdRoute: EventsEventIdRoute,
   StudentClubsRoute: StudentClubsRoute,
   StudentEventsRoute: StudentEventsRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,
