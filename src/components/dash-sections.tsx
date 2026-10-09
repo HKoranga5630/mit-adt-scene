@@ -10,7 +10,7 @@ import { clubs, events, eventById, clubById, sampleStudent, notifications, annou
 
 const myEvents = sampleStudent.registeredEventIds.map(eventById).filter(Boolean) as CollegeEvent[];
 const myClubs = sampleStudent.joinedClubIds.map(clubById).filter(Boolean) as typeof clubs;
-const repClub = clubs[0];
+const repClub = clubs[0]!;
 const repEvents = events.filter(e => e.club === repClub.name);
 
 function EventRow({ e, children }: { e: CollegeEvent; children?: React.ReactNode }) {
@@ -63,5 +63,5 @@ export function EventManagementPanel() {
  return <Panel title="Event Management">{events.map(e => <EventRow key={e.id} e={e}><div className="flex gap-2"><Button size="sm" variant="outline" disabled><Pencil size={14} />Edit</Button><Button size="sm" variant="outline" disabled><Trash2 size={14} />Delete</Button></div></EventRow>)}</Panel>;
 }
 export function ParticipationReportsPanel() {
- return <Panel title="Participation Reports">{participation.map(p => <div key={p.event} className="dash-row block"><div className="flex justify-between text-sm mb-2"><span className="font-semibold flex items-center gap-2"><CalendarDays size={14} />{p.event}</span><span className="text-muted-foreground">{p.registered} / {p.capacity}</span></div><Progress value={(p.registered / p.capacity) * 100} /></div>)}</Panel>;
+ return <Panel title="Participation Reports">{participation.map(p => <div key={p.event} className="dash-row flex-col !items-stretch"><div className="flex justify-between text-sm mb-2"><span className="font-semibold flex items-center gap-2"><CalendarDays size={14} />{p.event}</span><span className="text-muted-foreground">{p.registered} / {p.capacity}</span></div><Progress value={(p.registered / p.capacity) * 100} /></div>)}</Panel>;
 }
