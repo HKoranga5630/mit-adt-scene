@@ -14,6 +14,7 @@ import { Route as ClubsRouteImport } from './routes/clubs'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as StudentLoginRouteImport } from './routes/student-login'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminApprovalsRouteImport } from './routes/admin.approvals'
 import { Route as AdminClubsRouteImport } from './routes/admin.clubs'
@@ -55,6 +56,11 @@ const LoginRoute = LoginRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentLoginRoute = StudentLoginRouteImport.update({
+  id: '/student-login',
+  path: '/student-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/events': typeof EventsRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/student-login': typeof StudentLoginRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/clubs': typeof AdminClubsRoute
   '/admin/events': typeof AdminEventsRoute
@@ -173,6 +180,7 @@ export interface FileRoutesByTo {
   '/events': typeof EventsRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/student-login': typeof StudentLoginRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/clubs': typeof AdminClubsRoute
   '/admin/events': typeof AdminEventsRoute
@@ -198,6 +206,7 @@ export interface FileRoutesById {
   '/events': typeof EventsRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/student-login': typeof StudentLoginRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/clubs': typeof AdminClubsRoute
   '/admin/events': typeof AdminEventsRoute
@@ -224,6 +233,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/login'
     | '/signup'
+    | '/student-login'
     | '/admin/approvals'
     | '/admin/clubs'
     | '/admin/events'
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/login'
     | '/signup'
+    | '/student-login'
     | '/admin/approvals'
     | '/admin/clubs'
     | '/admin/events'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/login'
     | '/signup'
+    | '/student-login'
     | '/admin/approvals'
     | '/admin/clubs'
     | '/admin/events'
@@ -297,6 +309,7 @@ export interface RootRouteChildren {
   EventsRoute: typeof EventsRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
+  StudentLoginRoute: typeof StudentLoginRoute
   AdminApprovalsRoute: typeof AdminApprovalsRoute
   AdminClubsRoute: typeof AdminClubsRoute
   AdminEventsRoute: typeof AdminEventsRoute
@@ -351,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student-login': {
+      id: '/student-login'
+      path: '/student-login'
+      fullPath: '/student-login'
+      preLoaderRoute: typeof StudentLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -481,6 +501,7 @@ const rootRouteChildren: RootRouteChildren = {
   EventsRoute: EventsRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
+  StudentLoginRoute: StudentLoginRoute,
   AdminApprovalsRoute: AdminApprovalsRoute,
   AdminClubsRoute: AdminClubsRoute,
   AdminEventsRoute: AdminEventsRoute,
