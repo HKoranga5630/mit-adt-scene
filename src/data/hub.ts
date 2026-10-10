@@ -1,14 +1,19 @@
+import groovanceLogo from '@/assets/groovance-logo.jpg.asset.json';
+import ieeeLogo from '@/assets/ieee-logo.jpg.asset.json';
+import ercLogo from '@/assets/erc-ms-logo.jpg.asset.json';
 import robotics from '@/assets/robotics.jpg';
 import music from '@/assets/music.jpg';
 import arts from '@/assets/arts.jpg';
 export type Category = 'Technology' | 'Cultural' | 'Arts & Design' | 'Community' | 'Sports';
-export interface Club { id: string; name: string; category: Category; description: string; members: number; icon: 'code'|'music'|'palette'|'heart'|'camera'|'sport'; tone: string; about: string; }
+export interface Club { id: string; name: string; category: Category; description: string; members: number; logo?: string; icon: 'code'|'music'|'palette'|'heart'|'camera'|'sport'; tone: string; about: string; }
 export interface CollegeEvent { id: string; name: string; category: Category; date: string; day: string; month: string; time: string; venue: string; club: string; image: string; description: string; }
 // Illustrative frontend content only. Replace through a real data service when integrated.
 export const clubs: Club[]=[
+ {id:'groovance',name:'Groovance',logo:groovanceLogo.url,category:'Cultural',description:'Dance, rhythm, and student performances.',members:0,icon:'music',tone:'coral',about:'Discover the Groovance campus dance community. Club details will be added when available.'},
+ {id:'erc-ms',name:'ERC MS',logo:ercLogo.url,category:'Technology',description:'Connect with the ERC MS campus community.',members:0,icon:'code',tone:'teal',about:'Explore ERC MS at MIT ADT University. Club details will be added when available.'},
  {id:'aces',name:'ACES',category:'Technology',description:'Computer engineering and applied science in action. Build projects and grow with fellow tech enthusiasts.',members:128,icon:'code',tone:'blue',about:'A student community for curious builders. Explore computing, electronics, and emerging technology through collaborative projects, peer-led workshops, and friendly challenges.'},
  {id:'impact',name:'Impact',category:'Community',description:'Small actions, meaningful change. Volunteer, raise awareness, and give back together.',members:156,icon:'heart',tone:'teal',about:'Meet students passionate about making a positive difference. Collaborate on volunteering activities, awareness initiatives, and community-led projects across campus.'},
- {id:'ieee',name:'IEEE',category:'Technology',description:'Technology, research, and professional growth. Learn from experts and build your network.',members:112,icon:'code',tone:'coral',about:'The campus professional technology community. Take part in technical talks, workshops, and competitions while connecting with industry and research practitioners.'},
+ {id:'ieee',name:'IEEE',logo:ieeeLogo.url,category:'Technology',description:'Technology, research, and professional growth. Learn from experts and build your network.',members:112,icon:'code',tone:'coral',about:'The campus professional technology community. Take part in technical talks, workshops, and competitions while connecting with industry and research practitioners.'},
  {id:'cyber-sakti',name:'Cyber Sakti',category:'Technology',description:'Security starts here. Practise ethical hacking and stay ahead of cyber threats.',members:84,icon:'code',tone:'gold',about:'A cybersecurity collective for students who love solving puzzles. Practise ethical hacking, capture-the-flag challenges, and secure-systems awareness together.'},
  {id:'cloud-aws',name:'Cloud Computing AWS',category:'Technology',description:'Deploy, scale, and build on the cloud with guided AWS labs and real projects.',members:96,icon:'code',tone:'blue',about:'A hands-on cloud community. Explore AWS services, hosting, and deployment through guided labs, certification study groups, and team projects.'},
 ];

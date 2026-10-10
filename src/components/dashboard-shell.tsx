@@ -1,6 +1,6 @@
 import { Link, useRouterState } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
-import { LayoutDashboard, CalendarDays, Users, Bell, LogOut, Compass, PlusCircle, ClipboardList, Megaphone, ShieldCheck, BarChart3, UserCog, Building2 } from 'lucide-react';
+import { LayoutDashboard, CalendarDays, Users, Bell, LogOut, Compass, PlusCircle, ClipboardList, Megaphone, ShieldCheck, BarChart3, UserCog, Building2, Award, UserCheck } from 'lucide-react';
 
 type Role = 'student' | 'club' | 'admin';
 const navs = {
@@ -10,6 +10,8 @@ const navs = {
   { to: '/clubs', label: 'Browse Clubs', icon: Compass },
   { to: '/student/events', label: 'My Events', icon: ClipboardList },
   { to: '/student/clubs', label: 'My Clubs', icon: Users },
+  { to: '/student/attendance', label: 'Attendance', icon: UserCheck },
+  { to: '/student/certificates', label: 'Digital Certificates', icon: Award },
   { to: '/student/notifications', label: 'Notifications', icon: Bell },
  ] },
  club: { label: 'Club Representative', items: [
@@ -17,14 +19,20 @@ const navs = {
   { to: '/club/create-event', label: 'Create Event', icon: PlusCircle },
   { to: '/club/events', label: 'Manage Events', icon: CalendarDays },
   { to: '/club/announcements', label: 'Announcements', icon: Megaphone },
+  { to: '/club/attendance', label: 'Attendance', icon: UserCheck },
+  { to: '/club/certificates', label: 'Digital Certificates', icon: Award },
+  { to: '/club/notifications', label: 'Notifications', icon: Bell },
   { to: '/club/registrations', label: 'Registrations', icon: ClipboardList },
  ] },
  admin: { label: 'Administrator', items: [
   { to: '/admin', label: 'Admin Dashboard', icon: LayoutDashboard },
   { to: '/admin/approvals', label: 'Club Approvals', icon: ShieldCheck },
   { to: '/admin/users', label: 'User Management', icon: UserCog },
-  { to: '/admin/clubs', label: 'Club Management', icon: Building2 },
+  { to: '/admin/clubs', label: 'Club Management', icon: Building2, Award, UserCheck },
   { to: '/admin/events', label: 'Event Management', icon: CalendarDays },
+  { to: '/admin/attendance', label: 'Attendance', icon: UserCheck },
+  { to: '/admin/certificates', label: 'Digital Certificates', icon: Award },
+  { to: '/admin/notifications', label: 'Notifications', icon: Bell },
   { to: '/admin/reports', label: 'Participation Reports', icon: BarChart3 },
  ] },
 } as const;

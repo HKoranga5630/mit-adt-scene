@@ -6,3 +6,7 @@
 - [x] Add Student, Club, and Admin dashboards plus Club/Event detail pages (frontend only).
 - [x] Rename the club list to ACES, Impact, IEEE, Cyber Sakti, and Cloud Computing AWS.
 - [x] Add a Student Login page using enrollment number and password (frontend only).
+- [x] Make role-based login the first page and add Admin Login.
+- [x] Add Groovance, ERC MS, and supplied identifiable club logos.
+- [x] Add attendance, notifications, and digital certificate pages and navigation.
+- [x] Verify the new pages and controls.

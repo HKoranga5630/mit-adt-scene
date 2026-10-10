@@ -10,25 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as ClubsRouteImport } from './routes/clubs'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StudentLoginRouteImport } from './routes/student-login'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminApprovalsRouteImport } from './routes/admin.approvals'
+import { Route as AdminAttendanceRouteImport } from './routes/admin.attendance'
+import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
 import { Route as AdminClubsRouteImport } from './routes/admin.clubs'
 import { Route as AdminEventsRouteImport } from './routes/admin.events'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as ClubIndexRouteImport } from './routes/club.index'
 import { Route as ClubAnnouncementsRouteImport } from './routes/club.announcements'
+import { Route as ClubAttendanceRouteImport } from './routes/club.attendance'
+import { Route as ClubCertificatesRouteImport } from './routes/club.certificates'
 import { Route as ClubCreateEventRouteImport } from './routes/club.create-event'
 import { Route as ClubEventsRouteImport } from './routes/club.events'
+import { Route as ClubNotificationsRouteImport } from './routes/club.notifications'
 import { Route as ClubRegistrationsRouteImport } from './routes/club.registrations'
 import { Route as ClubsClubIdRouteImport } from './routes/clubs_.$clubId'
 import { Route as EventsEventIdRouteImport } from './routes/events_.$eventId'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
+import { Route as StudentAttendanceRouteImport } from './routes/student.attendance'
+import { Route as StudentCertificatesRouteImport } from './routes/student.certificates'
 import { Route as StudentClubsRouteImport } from './routes/student.clubs'
 import { Route as StudentEventsRouteImport } from './routes/student.events'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
@@ -36,6 +46,11 @@ import { Route as StudentNotificationsRouteImport } from './routes/student.notif
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin-login',
+  path: '/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClubsRoute = ClubsRouteImport.update({
@@ -46,6 +61,11 @@ const ClubsRoute = ClubsRouteImport.update({
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -73,6 +93,16 @@ const AdminApprovalsRoute = AdminApprovalsRouteImport.update({
   path: '/admin/approvals',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAttendanceRoute = AdminAttendanceRouteImport.update({
+  id: '/admin/attendance',
+  path: '/admin/attendance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCertificatesRoute = AdminCertificatesRouteImport.update({
+  id: '/admin/certificates',
+  path: '/admin/certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminClubsRoute = AdminClubsRouteImport.update({
   id: '/admin/clubs',
   path: '/admin/clubs',
@@ -81,6 +111,11 @@ const AdminClubsRoute = AdminClubsRouteImport.update({
 const AdminEventsRoute = AdminEventsRouteImport.update({
   id: '/admin/events',
   path: '/admin/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/admin/notifications',
+  path: '/admin/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminReportsRoute = AdminReportsRouteImport.update({
@@ -103,6 +138,16 @@ const ClubAnnouncementsRoute = ClubAnnouncementsRouteImport.update({
   path: '/club/announcements',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClubAttendanceRoute = ClubAttendanceRouteImport.update({
+  id: '/club/attendance',
+  path: '/club/attendance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubCertificatesRoute = ClubCertificatesRouteImport.update({
+  id: '/club/certificates',
+  path: '/club/certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClubCreateEventRoute = ClubCreateEventRouteImport.update({
   id: '/club/create-event',
   path: '/club/create-event',
@@ -111,6 +156,11 @@ const ClubCreateEventRoute = ClubCreateEventRouteImport.update({
 const ClubEventsRoute = ClubEventsRouteImport.update({
   id: '/club/events',
   path: '/club/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubNotificationsRoute = ClubNotificationsRouteImport.update({
+  id: '/club/notifications',
+  path: '/club/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClubRegistrationsRoute = ClubRegistrationsRouteImport.update({
@@ -133,6 +183,16 @@ const StudentIndexRoute = StudentIndexRouteImport.update({
   path: '/student/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudentAttendanceRoute = StudentAttendanceRouteImport.update({
+  id: '/student/attendance',
+  path: '/student/attendance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentCertificatesRoute = StudentCertificatesRouteImport.update({
+  id: '/student/certificates',
+  path: '/student/certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudentClubsRoute = StudentClubsRouteImport.update({
   id: '/student/clubs',
   path: '/student/clubs',
@@ -151,22 +211,32 @@ const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
   '/clubs': typeof ClubsRoute
   '/events': typeof EventsRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/student-login': typeof StudentLoginRoute
   '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/clubs': typeof AdminClubsRoute
   '/admin/events': typeof AdminEventsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/users': typeof AdminUsersRoute
   '/club/announcements': typeof ClubAnnouncementsRoute
+  '/club/attendance': typeof ClubAttendanceRoute
+  '/club/certificates': typeof ClubCertificatesRoute
   '/club/create-event': typeof ClubCreateEventRoute
   '/club/events': typeof ClubEventsRoute
+  '/club/notifications': typeof ClubNotificationsRoute
   '/club/registrations': typeof ClubRegistrationsRoute
   '/clubs/$clubId': typeof ClubsClubIdRoute
   '/events/$eventId': typeof EventsEventIdRoute
+  '/student/attendance': typeof StudentAttendanceRoute
+  '/student/certificates': typeof StudentCertificatesRoute
   '/student/clubs': typeof StudentClubsRoute
   '/student/events': typeof StudentEventsRoute
   '/student/notifications': typeof StudentNotificationsRoute
@@ -176,22 +246,32 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
   '/clubs': typeof ClubsRoute
   '/events': typeof EventsRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/student-login': typeof StudentLoginRoute
   '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/clubs': typeof AdminClubsRoute
   '/admin/events': typeof AdminEventsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/users': typeof AdminUsersRoute
   '/club/announcements': typeof ClubAnnouncementsRoute
+  '/club/attendance': typeof ClubAttendanceRoute
+  '/club/certificates': typeof ClubCertificatesRoute
   '/club/create-event': typeof ClubCreateEventRoute
   '/club/events': typeof ClubEventsRoute
+  '/club/notifications': typeof ClubNotificationsRoute
   '/club/registrations': typeof ClubRegistrationsRoute
   '/clubs/$clubId': typeof ClubsClubIdRoute
   '/events/$eventId': typeof EventsEventIdRoute
+  '/student/attendance': typeof StudentAttendanceRoute
+  '/student/certificates': typeof StudentCertificatesRoute
   '/student/clubs': typeof StudentClubsRoute
   '/student/events': typeof StudentEventsRoute
   '/student/notifications': typeof StudentNotificationsRoute
@@ -202,22 +282,32 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin-login': typeof AdminLoginRoute
   '/clubs': typeof ClubsRoute
   '/events': typeof EventsRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/student-login': typeof StudentLoginRoute
   '/admin/approvals': typeof AdminApprovalsRoute
+  '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/clubs': typeof AdminClubsRoute
   '/admin/events': typeof AdminEventsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/reports': typeof AdminReportsRoute
   '/admin/users': typeof AdminUsersRoute
   '/club/announcements': typeof ClubAnnouncementsRoute
+  '/club/attendance': typeof ClubAttendanceRoute
+  '/club/certificates': typeof ClubCertificatesRoute
   '/club/create-event': typeof ClubCreateEventRoute
   '/club/events': typeof ClubEventsRoute
+  '/club/notifications': typeof ClubNotificationsRoute
   '/club/registrations': typeof ClubRegistrationsRoute
   '/clubs_/$clubId': typeof ClubsClubIdRoute
   '/events_/$eventId': typeof EventsEventIdRoute
+  '/student/attendance': typeof StudentAttendanceRoute
+  '/student/certificates': typeof StudentCertificatesRoute
   '/student/clubs': typeof StudentClubsRoute
   '/student/events': typeof StudentEventsRoute
   '/student/notifications': typeof StudentNotificationsRoute
@@ -229,22 +319,32 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin-login'
     | '/clubs'
     | '/events'
+    | '/home'
     | '/login'
     | '/signup'
     | '/student-login'
     | '/admin/approvals'
+    | '/admin/attendance'
+    | '/admin/certificates'
     | '/admin/clubs'
     | '/admin/events'
+    | '/admin/notifications'
     | '/admin/reports'
     | '/admin/users'
     | '/club/announcements'
+    | '/club/attendance'
+    | '/club/certificates'
     | '/club/create-event'
     | '/club/events'
+    | '/club/notifications'
     | '/club/registrations'
     | '/clubs/$clubId'
     | '/events/$eventId'
+    | '/student/attendance'
+    | '/student/certificates'
     | '/student/clubs'
     | '/student/events'
     | '/student/notifications'
@@ -254,22 +354,32 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin-login'
     | '/clubs'
     | '/events'
+    | '/home'
     | '/login'
     | '/signup'
     | '/student-login'
     | '/admin/approvals'
+    | '/admin/attendance'
+    | '/admin/certificates'
     | '/admin/clubs'
     | '/admin/events'
+    | '/admin/notifications'
     | '/admin/reports'
     | '/admin/users'
     | '/club/announcements'
+    | '/club/attendance'
+    | '/club/certificates'
     | '/club/create-event'
     | '/club/events'
+    | '/club/notifications'
     | '/club/registrations'
     | '/clubs/$clubId'
     | '/events/$eventId'
+    | '/student/attendance'
+    | '/student/certificates'
     | '/student/clubs'
     | '/student/events'
     | '/student/notifications'
@@ -279,22 +389,32 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin-login'
     | '/clubs'
     | '/events'
+    | '/home'
     | '/login'
     | '/signup'
     | '/student-login'
     | '/admin/approvals'
+    | '/admin/attendance'
+    | '/admin/certificates'
     | '/admin/clubs'
     | '/admin/events'
+    | '/admin/notifications'
     | '/admin/reports'
     | '/admin/users'
     | '/club/announcements'
+    | '/club/attendance'
+    | '/club/certificates'
     | '/club/create-event'
     | '/club/events'
+    | '/club/notifications'
     | '/club/registrations'
     | '/clubs_/$clubId'
     | '/events_/$eventId'
+    | '/student/attendance'
+    | '/student/certificates'
     | '/student/clubs'
     | '/student/events'
     | '/student/notifications'
@@ -305,22 +425,32 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ClubsRoute: typeof ClubsRoute
   EventsRoute: typeof EventsRoute
+  HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
   StudentLoginRoute: typeof StudentLoginRoute
   AdminApprovalsRoute: typeof AdminApprovalsRoute
+  AdminAttendanceRoute: typeof AdminAttendanceRoute
+  AdminCertificatesRoute: typeof AdminCertificatesRoute
   AdminClubsRoute: typeof AdminClubsRoute
   AdminEventsRoute: typeof AdminEventsRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
   AdminReportsRoute: typeof AdminReportsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   ClubAnnouncementsRoute: typeof ClubAnnouncementsRoute
+  ClubAttendanceRoute: typeof ClubAttendanceRoute
+  ClubCertificatesRoute: typeof ClubCertificatesRoute
   ClubCreateEventRoute: typeof ClubCreateEventRoute
   ClubEventsRoute: typeof ClubEventsRoute
+  ClubNotificationsRoute: typeof ClubNotificationsRoute
   ClubRegistrationsRoute: typeof ClubRegistrationsRoute
   ClubsClubIdRoute: typeof ClubsClubIdRoute
   EventsEventIdRoute: typeof EventsEventIdRoute
+  StudentAttendanceRoute: typeof StudentAttendanceRoute
+  StudentCertificatesRoute: typeof StudentCertificatesRoute
   StudentClubsRoute: typeof StudentClubsRoute
   StudentEventsRoute: typeof StudentEventsRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
@@ -338,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin-login': {
+      id: '/admin-login'
+      path: '/admin-login'
+      fullPath: '/admin-login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/clubs': {
       id: '/clubs'
       path: '/clubs'
@@ -350,6 +487,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -387,6 +531,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminApprovalsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/attendance': {
+      id: '/admin/attendance'
+      path: '/admin/attendance'
+      fullPath: '/admin/attendance'
+      preLoaderRoute: typeof AdminAttendanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/certificates': {
+      id: '/admin/certificates'
+      path: '/admin/certificates'
+      fullPath: '/admin/certificates'
+      preLoaderRoute: typeof AdminCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/clubs': {
       id: '/admin/clubs'
       path: '/admin/clubs'
@@ -399,6 +557,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/events'
       fullPath: '/admin/events'
       preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/admin/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/reports': {
@@ -429,6 +594,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClubAnnouncementsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/club/attendance': {
+      id: '/club/attendance'
+      path: '/club/attendance'
+      fullPath: '/club/attendance'
+      preLoaderRoute: typeof ClubAttendanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/certificates': {
+      id: '/club/certificates'
+      path: '/club/certificates'
+      fullPath: '/club/certificates'
+      preLoaderRoute: typeof ClubCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/club/create-event': {
       id: '/club/create-event'
       path: '/club/create-event'
@@ -441,6 +620,13 @@ declare module '@tanstack/react-router' {
       path: '/club/events'
       fullPath: '/club/events'
       preLoaderRoute: typeof ClubEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club/notifications': {
+      id: '/club/notifications'
+      path: '/club/notifications'
+      fullPath: '/club/notifications'
+      preLoaderRoute: typeof ClubNotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/club/registrations': {
@@ -471,6 +657,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/student/attendance': {
+      id: '/student/attendance'
+      path: '/student/attendance'
+      fullPath: '/student/attendance'
+      preLoaderRoute: typeof StudentAttendanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/certificates': {
+      id: '/student/certificates'
+      path: '/student/certificates'
+      fullPath: '/student/certificates'
+      preLoaderRoute: typeof StudentCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/student/clubs': {
       id: '/student/clubs'
       path: '/student/clubs'
@@ -497,22 +697,32 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ClubsRoute: ClubsRoute,
   EventsRoute: EventsRoute,
+  HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
   StudentLoginRoute: StudentLoginRoute,
   AdminApprovalsRoute: AdminApprovalsRoute,
+  AdminAttendanceRoute: AdminAttendanceRoute,
+  AdminCertificatesRoute: AdminCertificatesRoute,
   AdminClubsRoute: AdminClubsRoute,
   AdminEventsRoute: AdminEventsRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
   AdminReportsRoute: AdminReportsRoute,
   AdminUsersRoute: AdminUsersRoute,
   ClubAnnouncementsRoute: ClubAnnouncementsRoute,
+  ClubAttendanceRoute: ClubAttendanceRoute,
+  ClubCertificatesRoute: ClubCertificatesRoute,
   ClubCreateEventRoute: ClubCreateEventRoute,
   ClubEventsRoute: ClubEventsRoute,
+  ClubNotificationsRoute: ClubNotificationsRoute,
   ClubRegistrationsRoute: ClubRegistrationsRoute,
   ClubsClubIdRoute: ClubsClubIdRoute,
   EventsEventIdRoute: EventsEventIdRoute,
+  StudentAttendanceRoute: StudentAttendanceRoute,
+  StudentCertificatesRoute: StudentCertificatesRoute,
   StudentClubsRoute: StudentClubsRoute,
   StudentEventsRoute: StudentEventsRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,

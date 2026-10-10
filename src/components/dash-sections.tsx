@@ -1,3 +1,4 @@
+import { ClubLogo } from '@/components/hub-cards';
 import { Link } from '@tanstack/react-router';
 import { Bell, CalendarDays, Eye, Pencil, Trash2, Check, X, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,8 +11,8 @@ import { clubs, events, eventById, clubById, sampleStudent, notifications, annou
 
 const myEvents = sampleStudent.registeredEventIds.map(eventById).filter(Boolean) as CollegeEvent[];
 const myClubs = sampleStudent.joinedClubIds.map(clubById).filter(Boolean) as typeof clubs;
-const repClub = clubs[0]!;
-const repEvents = events.filter(e => e.club === repClub.name);
+const repClub = clubById('aces');
+const repEvents = events.filter(e => e.club === repClub?.name);
 
 function EventRow({ e, children }: { e: CollegeEvent; children?: React.ReactNode }) {
  return <div className="dash-row"><img src={e.image} alt={e.name} width={72} height={48} className="h-12 w-[72px] rounded object-cover" /><div className="min-w-0 flex-1"><Link to="/events/$eventId" params={{ eventId: e.id }} className="font-semibold text-sm hover:text-primary">{e.name}</Link><p className="text-xs text-muted-foreground">{e.date} · {e.time.split(' – ')[0]} · {e.venue}</p></div>{children}</div>;
@@ -21,7 +22,7 @@ export function UpcomingEventsPanel() {
  return <Panel title="Upcoming Events" action={<Button asChild variant="link" size="sm"><Link to="/events">View all</Link></Button>}>{events.map(e => <EventRow key={e.id} e={e}><Button asChild size="sm" variant="outline"><Link to="/events/$eventId" params={{ eventId: e.id }}>View Details</Link></Button></EventRow>)}</Panel>;
 }
 export function BrowseClubsPanel() {
- return <Panel title="Browse Clubs" action={<Button asChild variant="link" size="sm"><Link to="/clubs">All clubs</Link></Button>}><div className="grid gap-3 sm:grid-cols-3">{clubs.slice(0, 6).map(c => <Link key={c.id} to="/clubs/$clubId" params={{ clubId: c.id }} className="rounded-md border border-border p-3 hover:border-primary"><p className="text-sm font-semibold">{c.name}</p><span className="category-badge mt-2" data-category={c.category}>{c.category}</span></Link>)}</div></Panel>;
+ return <Panel title="Browse Clubs" action={<Button asChild variant="link" size="sm"><Link to="/clubs">All clubs</Link></Button>}><div className="grid gap-3 sm:grid-cols-3">{clubs.map(c => <Link key={c.id} to="/clubs/$clubId" params={{ clubId: c.id }} className="rounded-md border border-border p-3 hover:border-primary"><ClubLogo club={c}/><p className="text-sm font-semibold">{c.name}</p><span className="category-badge mt-2" data-category={c.category}>{c.category}</span></Link>)}</div></Panel>;
 }
 export function MyEventsPanel() {
  return <Panel title="My Registered Events">{myEvents.map(e => <EventRow key={e.id} e={e}><span className="category-badge" data-category="Community">Registered</span></EventRow>)}</Panel>;
@@ -34,7 +35,8 @@ export function NotificationsPanel({ limit }: { limit?: number }) {
 }
 
 export function ClubProfilePanel() {
- return <Panel title="Club Profile" action={<Button size="sm" variant="outline" disabled><Pencil size={14} />Edit Profile</Button>}><p className="font-semibold">{repClub.name}</p><span className="category-badge mt-2" data-category={repClub.category}>{repClub.category}</span><p className="text-sm text-muted-foreground mt-3 leading-7">{repClub.about}</p><p className="text-xs text-muted-foreground mt-2 flex items-center gap-2"><Users size={14} />{repClub.members} members</p></Panel>;
+ if (!repClub) return null;
+ return <Panel title="Club Profile" action={<Button size="sm" variant="outline" disabled><Pencil size={14} />Edit Profile</Button>}><ClubLogo club={repClub}/><p className="font-semibold">{repClub.name}</p><span className="category-badge mt-2" data-category={repClub.category}>{repClub.category}</span><p className="text-sm text-muted-foreground mt-3 leading-7">{repClub.about}</p><p className="text-xs text-muted-foreground mt-2 flex items-center gap-2"><Users size={14} />{repClub.members} members</p></Panel>;
 }
 export function ManageEventsPanel() {
  return <Panel title="Manage Events" action={<Button asChild size="sm"><Link to="/club/create-event"><Plus size={14} />Create</Link></Button>}>{repEvents.map(e => <EventRow key={e.id} e={e}><div className="flex gap-2 flex-wrap"><Button size="sm" variant="outline" disabled><Pencil size={14} />Edit</Button><Button size="sm" variant="outline" disabled><Trash2 size={14} />Delete</Button><Button asChild size="sm" variant="outline"><Link to="/club/registrations"><Eye size={14} />View Registrations</Link></Button></div></EventRow>)}</Panel>;
@@ -57,7 +59,7 @@ export function UserManagementPanel() {
  return <Panel title="User Management"><div className="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody>{hubUsers.map(u => <tr key={u.id}><td>{u.name}</td><td>{u.email}</td><td>{u.role}</td><td>{u.status}</td><td><div className="flex gap-2"><Button size="sm" variant="outline" disabled><Pencil size={13} /></Button><Button size="sm" variant="outline" disabled><Trash2 size={13} /></Button></div></td></tr>)}</tbody></table></div></Panel>;
 }
 export function ClubManagementPanel() {
- return <Panel title="Club Management"><div className="table-scroll"><table><thead><tr><th>Club</th><th>Category</th><th>Members</th><th>Actions</th></tr></thead><tbody>{clubs.map(c => <tr key={c.id}><td><Link to="/clubs/$clubId" params={{ clubId: c.id }} className="hover:text-primary">{c.name}</Link></td><td>{c.category}</td><td>{c.members}</td><td><div className="flex gap-2"><Button size="sm" variant="outline" disabled><Pencil size={13} /></Button><Button size="sm" variant="outline" disabled><Trash2 size={13} /></Button></div></td></tr>)}</tbody></table></div></Panel>;
+ return <Panel title="Club Management"><div className="table-scroll"><table><thead><tr><th>Club</th><th>Category</th><th>Members</th><th>Actions</th></tr></thead><tbody>{clubs.map(c => <tr key={c.id}><td><div className="flex items-center gap-3"><ClubLogo club={c}/><Link to="/clubs/$clubId" params={{ clubId: c.id }} className="hover:text-primary">{c.name}</Link></div></td><td>{c.category}</td><td>{c.members}</td><td><div className="flex gap-2"><Button size="sm" variant="outline" disabled><Pencil size={13} /></Button><Button size="sm" variant="outline" disabled><Trash2 size={13} /></Button></div></td></tr>)}</tbody></table></div></Panel>;
 }
 export function EventManagementPanel() {
  return <Panel title="Event Management">{events.map(e => <EventRow key={e.id} e={e}><div className="flex gap-2"><Button size="sm" variant="outline" disabled><Pencil size={14} />Edit</Button><Button size="sm" variant="outline" disabled><Trash2 size={14} />Delete</Button></div></EventRow>)}</Panel>;
