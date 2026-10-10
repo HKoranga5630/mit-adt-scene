@@ -232,3 +232,6 @@
 .table-scroll th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted-foreground); padding: 8px 10px; border-bottom: 1px solid var(--border); }
 .table-scroll td { padding: 11px 10px; border-bottom: 1px solid var(--border); }
 @media (max-width: 960px) { .dash-wrap, .detail-layout { grid-template-columns: 1fr; } .dash-side { position: static; min-width: 0; } .dash-wrap > * { min-width: 0; } .dash-stats { grid-template-columns: repeat(2,minmax(0,1fr)); } .dash-side nav { display: flex; overflow-x: auto; gap: 4px; } .dash-link { white-space: nowrap; } }
+
+.certificate-paper { padding: 28px; border: 2px solid var(--gold); background: var(--card); text-align: center; }
+.certificate-paper .brand { justify-content: center; }
