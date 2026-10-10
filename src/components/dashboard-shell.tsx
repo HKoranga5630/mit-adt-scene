@@ -28,7 +28,7 @@ const navs = {
   { to: '/admin', label: 'Admin Dashboard', icon: LayoutDashboard },
   { to: '/admin/approvals', label: 'Club Approvals', icon: ShieldCheck },
   { to: '/admin/users', label: 'User Management', icon: UserCog },
-  { to: '/admin/clubs', label: 'Club Management', icon: Building2, Award, UserCheck },
+  { to: '/admin/clubs', label: 'Club Management', icon: Building2 },
   { to: '/admin/events', label: 'Event Management', icon: CalendarDays },
   { to: '/admin/attendance', label: 'Attendance', icon: UserCheck },
   { to: '/admin/certificates', label: 'Digital Certificates', icon: Award },
@@ -43,11 +43,11 @@ export function DashboardLayout({ role, kicker, title, subtitle, children }: { r
  return <div className="site-container dash-wrap">
   <aside className="dash-side"><div className="dash-side-title">{nav.label}</div><nav aria-label={`${nav.label} navigation`}>
    {nav.items.map(i => { const Icon = i.icon; return <Link key={i.to} to={i.to} className={`dash-link ${pathname === i.to ? 'active' : ''}`}><Icon />{i.label}</Link>; })}
-   <Link to="/login" className="dash-link"><LogOut />Logout</Link>
+   <Link to="/" className="dash-link"><LogOut />Logout</Link><Link to="/" className="dash-link"><Users/>Switch Role</Link>
   </nav></aside>
   <main className="min-w-0">
    <div className="dash-head">{kicker && <p className="section-kicker">{kicker}</p>}<h1 className="dash-title">{title}</h1>{subtitle && <p className="section-subtitle">{subtitle}</p>}</div>
-   <p className="dash-note">Preview mode: sample data is shown and actions will work once accounts are connected.</p>
+   <p className="dash-note">Demo data · No authenticated session. Changes are temporary and reset after refresh; no emails or push notifications are delivered.</p>
    {children}
   </main>
  </div>;
