@@ -10,3 +10,9 @@
 - [x] Add Groovance, ERC MS, and supplied identifiable club logos.
 - [x] Add attendance, notifications, and digital certificate pages and navigation.
 - [x] Verify the new pages and controls.
+- [ ] Upgrade role login and signup with honest dashboard previews and forgot-password UI.
+- [ ] Add identifiable uploaded club logos and complete club/event details and filters.
+- [ ] Complete student demo membership, registration, notifications, attendance and downloadable certificate previews.
+- [ ] Complete representative event, announcement, attendance and certificate demo controls.
+- [ ] Complete admin approvals, management tables and notification controls.
+- [ ] Test all pages, demo interactions, and mobile/tablet/desktop layouts.
