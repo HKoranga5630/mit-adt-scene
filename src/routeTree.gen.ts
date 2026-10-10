@@ -9,9 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as ClubsRouteImport } from './routes/clubs'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StudentLoginRouteImport } from './routes/student-login'
@@ -33,11 +33,6 @@ import { Route as StudentClubsRouteImport } from './routes/student.clubs'
 import { Route as StudentEventsRouteImport } from './routes/student.events'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ClubsRoute = ClubsRouteImport.update({
   id: '/clubs',
   path: '/clubs',
@@ -46,6 +41,11 @@ const ClubsRoute = ClubsRouteImport.update({
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -150,9 +150,9 @@ const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/clubs': typeof ClubsRoute
   '/events': typeof EventsRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/student-login': typeof StudentLoginRoute
@@ -175,9 +175,9 @@ export interface FileRoutesByFullPath {
   '/student/': typeof StudentIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/clubs': typeof ClubsRoute
   '/events': typeof EventsRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/student-login': typeof StudentLoginRoute
@@ -201,9 +201,9 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/clubs': typeof ClubsRoute
   '/events': typeof EventsRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/student-login': typeof StudentLoginRoute
@@ -228,9 +228,9 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/clubs'
     | '/events'
+    | '/home'
     | '/login'
     | '/signup'
     | '/student-login'
@@ -253,9 +253,9 @@ export interface FileRouteTypes {
     | '/student/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/clubs'
     | '/events'
+    | '/home'
     | '/login'
     | '/signup'
     | '/student-login'
@@ -278,9 +278,9 @@ export interface FileRouteTypes {
     | '/student'
   id:
     | '__root__'
-    | '/'
     | '/clubs'
     | '/events'
+    | '/home'
     | '/login'
     | '/signup'
     | '/student-login'
@@ -304,9 +304,9 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   ClubsRoute: typeof ClubsRoute
   EventsRoute: typeof EventsRoute
+  HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
   StudentLoginRoute: typeof StudentLoginRoute
@@ -331,13 +331,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/clubs': {
       id: '/clubs'
       path: '/clubs'
@@ -350,6 +343,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -496,9 +496,9 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   ClubsRoute: ClubsRoute,
   EventsRoute: EventsRoute,
+  HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
   StudentLoginRoute: StudentLoginRoute,
