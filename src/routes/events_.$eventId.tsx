@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 import { ArrowLeft, CalendarDays, Clock3, MapPin, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { eventById, clubByName, pageHead } from '@/data/hub';
+import { DemoJoin } from '@/components/demo-controls';
 export const Route = createFileRoute('/events_/$eventId')({
  loader: ({ params }) => { const event = eventById(params.eventId); if (!event) throw notFound(); return { event }; },
  head: ({ loaderData }) => loaderData ? pageHead(loaderData.event.name, loaderData.event.description) : { meta: [{ title: 'Event not found' }, { name: 'robots', content: 'noindex' }] },
@@ -19,7 +20,7 @@ function EventDetails() {
    <aside className="dash-panel">
     <p className="event-meta"><CalendarDays />{event.date}</p><p className="event-meta"><Clock3 />{event.time}</p><p className="event-meta"><MapPin />{event.venue}</p>
     <p className="event-meta"><Users />Organized by {club ? <Link to="/clubs/$clubId" params={{ clubId: club.id }} className="text-primary font-semibold">{event.club}</Link> : event.club}</p>
-    <Button className="w-full mt-6" disabled>Register for Event</Button><p className="text-xs text-muted-foreground text-center mt-3">Registration will be available once accounts are connected.</p>
+    <DemoJoin id={event.id} event className="mt-6" />
    </aside>
   </div>
  </div>;

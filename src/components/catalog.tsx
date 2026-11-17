@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Search, SearchX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { clubs, events } from '@/data/hub';
+import { useDemo } from '@/data/demo-store';
 import { ClubCard, EventCard } from '@/components/hub-cards';
 export function Catalog({kind}:{kind:'clubs'|'events'}) {
+ const { clubs, events } = useDemo();
  const [search,setSearch]=useState(''); const [category,setCategory]=useState('All');
  const items=kind==='clubs'?clubs:events;
  const categories=['All',...new Set(items.map(i=>i.category))];

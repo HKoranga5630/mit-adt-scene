@@ -1,16 +1,550 @@
+
 import { useState } from 'react';
 import { Award, Download, Eye, Save } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Panel, StatGrid } from '@/components/dashboard-shell';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import { UniversityBrand } from '@/components/site-shell';
+
 import { events, registrations } from '@/data/hub';
-export function AttendancePanel({student=false}:{student?:boolean}) {
- const [event,setEvent]=useState(events[0]?.name??'');
- return <><StatGrid stats={[{label:'Recorded attendance',value:0},{label:'Events',value:events.length}]}/><Panel title={student?'My Attendance':'Event Attendance'}><label htmlFor="attendance-event" className="auth-label mt-0">Event</label><select id="attendance-event" className="field mb-5" value={event} onChange={e=>setEvent(e.target.value)}>{events.map(e=><option key={e.id}>{e.name}</option>)}</select><div className="table-scroll"><table><thead><tr><th>{student?'Event':'Student'}</th><th>{student?'Date':'Email'}</th><th>Attendance</th></tr></thead><tbody>{student?events.filter(e=>e.name===event).map(e=><tr key={e.id}><td>{e.name}</td><td>{e.date}</td><td>Not recorded</td></tr>):registrations.filter(r=>r.event===event).map(r=><tr key={r.id}><td>{r.student}</td><td>{r.email}</td><td><select className="field" aria-label={`Attendance for ${r.student}`} disabled defaultValue="pending"><option value="pending">Not recorded</option><option>Present</option><option>Absent</option></select></td></tr>)}</tbody></table></div>{!student&&<Button disabled className="mt-4"><Save/>Save Attendance</Button>}</Panel></>;
+import { useDemo } from '@/data/demo-store';
+import { useAuth } from '@/data/auth-context';
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (char) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+
+    return entities[char];
+  });
 }
-export function CertificatesPanel({student=false}:{student?:boolean}) {
- const [open,setOpen]=useState(false);
- const [event,setEvent]=useState(events[0]?.name??'');
- return <><StatGrid stats={[{label:'Issued certificates',value:0},{label:'Pending attendance',value:events.length}]}/><Panel title="Digital Certificates"><div className="flex items-center gap-3 text-muted-foreground mb-5"><Award className="text-primary"/><p className="text-sm">No certificates issued yet.</p></div><label htmlFor="certificate-event" className="auth-label">Event</label><select className="field" id="certificate-event" value={event} onChange={e=>setEvent(e.target.value)}>{events.map(e=><option key={e.id}>{e.name}</option>)}</select><div className="flex flex-wrap gap-3 mt-5"><Button variant="outline" onClick={()=>setOpen(true)}><Eye/>View Sample</Button><Button disabled><Download/>{student?'Download Certificate':'Issue Certificates'}</Button></div></Panel><Dialog open={open} onOpenChange={setOpen}><DialogContent className="sm:max-w-2xl max-h-[90dvh] overflow-y-auto"><DialogHeader><DialogTitle>Certificate Preview</DialogTitle><DialogDescription>Sample only · Not an issued university certificate</DialogDescription></DialogHeader><div className="certificate-paper"><UniversityBrand/><p className="section-kicker mt-8">Sample · Not issued</p><h2 className="section-title">Certificate of Participation</h2><p className="text-sm text-muted-foreground mt-6">This sample recognizes</p><p className="dash-title mt-3">Student Name</p><p className="text-sm text-muted-foreground mt-5">for participation in</p><p className="text-lg font-semibold mt-2">{event}</p><div className="border-t border-border mt-8 pt-4 text-xs text-muted-foreground">Attendance confirmation and authorized approval required</div></div></DialogContent></Dialog></>;
+
+function downloadCertificate(
+  participant: string,
+  eventName: string,
+  issued: string
+) {
+  const safeName = escapeHtml(participant);
+  const safeEvent = escapeHtml(eventName);
+  const safeDate = escapeHtml(issued);
+
+  const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate - ${safeName}</title>
+<style>
+  body {
+    font-family: Georgia, serif;
+    background: #f1f5f9;
+    padding: 30px;
+    color: #172033;
+  }
+  .certificate {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 65px 40px;
+    background: white;
+    border: 9px double #9b8244;
+    text-align: center;
+  }
+  .university {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: #243b65;
+  }
+  h1 {
+    font-size: 38px;
+    color: #9b8244;
+    margin: 40px 0 20px;
+  }
+  .name {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 30px;
+    border-bottom: 1px solid #9b8244;
+    display: inline-block;
+    padding: 0 30px 12px;
+  }
+  .event {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 20px;
+  }
+  .date {
+    margin-top: 35px;
+    font-size: 15px;
+  }
+  .notice {
+    margin-top: 45px;
+    font: 12px Arial, sans-serif;
+    color: #64748b;
+  }
+  .print-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 22px;
+    background: #243b65;
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  @media print {
+    body { background: white; padding: 0; }
+    .certificate { margin: 0 auto; }
+    .print-button { display: none; }
+  }
+</style>
+</head>
+<body>
+<button class="print-button" onclick="window.print()">Print / Save as PDF</button>
+<div class="certificate">
+  <div class="university">MIT ADT UNIVERSITY</div>
+  <p>ART, DESIGN & TECHNOLOGY UNIVERSITY</p>
+  <h1>Certificate of Participation</h1>
+  <p>This certificate is proudly presented to</p>
+  <div class="name">${safeName}</div>
+  <p>for participation in</p>
+  <div class="event">${safeEvent}</div>
+  <p class="date">Issued on: ${safeDate}</p>
+  <p class="notice">Demo certificate generated by MIT ADT Connect.</p>
+</div>
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = url;
+  link.download = `MIT-ADT-Certificate-${participant.replace(/[^a-z0-9]/gi, '-')}.html`;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+export function AttendancePanel({
+  student = false,
+}: {
+  student?: boolean;
+}) {
+  const { attendance, setAttendance } = useDemo();
+  const { user } = useAuth();
+
+  const [event, setEvent] = useState(events[0]?.name ?? '');
+  const [draft, setDraft] = useState<Record<string, string>>({});
+  const [message, setMessage] = useState('');
+
+  const eventRegistrations = registrations.filter(
+    (r) => r.event === event
+  );
+
+  const myRegistrations = eventRegistrations.filter(
+    (r) =>
+      r.email.toLowerCase() === user?.email.toLowerCase() ||
+      r.student.toLowerCase() === user?.name.toLowerCase()
+  );
+
+  const visibleRegistrations = student
+    ? myRegistrations
+    : eventRegistrations;
+
+  const recordedCount = visibleRegistrations.filter(
+    (r) => (draft[r.id] ?? attendance[r.id]) === 'Present' ||
+      (draft[r.id] ?? attendance[r.id]) === 'Absent'
+  ).length;
+
+  function updateAttendance(id: string, value: string) {
+    setDraft((current) => ({
+      ...current,
+      [id]: value,
+    }));
+    setMessage('');
+  }
+
+  function saveAttendance() {
+    setAttendance((current) => ({
+      ...current,
+      ...draft,
+    }));
+
+    setDraft({});
+    setMessage('Attendance saved successfully.');
+  }
+
+  return (
+    <>
+      <StatGrid
+        stats={[
+          {
+            label: 'Recorded attendance',
+            value: recordedCount,
+          },
+          {
+            label: 'Events',
+            value: events.length,
+          },
+        ]}
+      />
+
+      <Panel title={student ? 'My Attendance' : 'Event Attendance'}>
+        <label
+          htmlFor="attendance-event"
+          className="auth-label mt-0"
+        >
+          Event
+        </label>
+
+        <select
+          id="attendance-event"
+          className="field mb-5"
+          value={event}
+          onChange={(e) => {
+            setEvent(e.target.value);
+            setDraft({});
+            setMessage('');
+          }}
+        >
+          {events.map((e) => (
+            <option key={e.id} value={e.name}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+
+        <div className="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>{student ? 'Event' : 'Student'}</th>
+                <th>{student ? 'Date' : 'Email'}</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {visibleRegistrations.length ? (
+                visibleRegistrations.map((r) => {
+                  const status =
+                    draft[r.id] ?? attendance[r.id] ?? 'pending';
+
+                  return (
+                    <tr key={r.id}>
+                      <td>{student ? r.event : r.student}</td>
+                      <td>
+                        {student
+                          ? events.find((e) => e.name === r.event)?.date
+                          : r.email}
+                      </td>
+                      <td>
+                        {student ? (
+                          status === 'pending' ? 'Not recorded' : status
+                        ) : (
+                          <select
+                            className="field"
+                            aria-label={`Attendance for ${r.student}`}
+                            value={status}
+                            onChange={(e) =>
+                              updateAttendance(r.id, e.target.value)
+                            }
+                          >
+                            <option value="pending">Not recorded</option>
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                          </select>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={3}>
+                    {student
+                      ? 'No matching attendance record found for this account.'
+                      : 'No students registered for this event.'}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {!student && (
+          <Button
+            className="mt-4"
+            onClick={saveAttendance}
+            disabled={Object.keys(draft).length === 0}
+          >
+            <Save />
+            Save Attendance
+          </Button>
+        )}
+
+        {message && (
+          <p className="text-sm text-green-700 mt-3" role="status">
+            {message}
+          </p>
+        )}
+      </Panel>
+    </>
+  );
+}
+
+export function CertificatesPanel({
+  student = false,
+}: {
+  student?: boolean;
+}) {
+  const {
+    attendance,
+    certificates,
+    setCertificates,
+  } = useDemo();
+
+  const { user } = useAuth();
+
+  const [open, setOpen] = useState(false);
+  const [event, setEvent] = useState(events[0]?.name ?? '');
+  const [message, setMessage] = useState('');
+
+  const eventRegistrations = registrations.filter(
+    (r) => r.event === event
+  );
+
+  const myCertificates = certificates.filter(
+    (c) =>
+      c.participant.toLowerCase() ===
+      (user?.name ?? '').toLowerCase()
+  );
+
+  const visibleCertificates = student
+    ? myCertificates
+    : certificates;
+
+  const presentRegistrations = eventRegistrations.filter(
+    (r) => attendance[r.id] === 'Present'
+  );
+
+  const pendingCount = eventRegistrations.filter(
+    (r) => attendance[r.id] !== 'Present'
+  ).length;
+
+  function issueCertificates() {
+    if (!presentRegistrations.length) {
+      setMessage(
+        'No students marked Present for this event. Please record attendance first.'
+      );
+      return;
+    }
+
+    const issuedDate = new Date().toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+
+    const newCertificates = presentRegistrations
+      .filter(
+        (r) =>
+          !certificates.some(
+            (c) =>
+              c.participant === r.student &&
+              c.event === event
+          )
+      )
+      .map((r) => ({
+        id: `certificate-${r.id}`,
+        participant: r.student,
+        event,
+        issued: issuedDate,
+      }));
+
+    if (!newCertificates.length) {
+      setMessage('Certificates have already been issued to these students.');
+      return;
+    }
+
+    setCertificates((current) => [
+      ...current,
+      ...newCertificates,
+    ]);
+
+    setMessage(
+      `${newCertificates.length} certificate(s) issued successfully.`
+    );
+  }
+
+  return (
+    <>
+      <StatGrid
+        stats={[
+          {
+            label: 'Issued certificates',
+            value: visibleCertificates.length,
+          },
+          {
+            label: 'Pending attendance',
+            value: student ? 0 : pendingCount,
+          },
+        ]}
+      />
+
+      <Panel title="Digital Certificates">
+        <div className="flex items-center gap-3 text-muted-foreground mb-5">
+          <Award className="text-primary" />
+          <p className="text-sm">
+            {visibleCertificates.length
+              ? `${visibleCertificates.length} certificate(s) available.`
+              : 'No certificates issued yet.'}
+          </p>
+        </div>
+
+        <label
+          htmlFor="certificate-event"
+          className="auth-label"
+        >
+          Event
+        </label>
+
+        <select
+          className="field"
+          id="certificate-event"
+          value={event}
+          onChange={(e) => {
+            setEvent(e.target.value);
+            setMessage('');
+          }}
+        >
+          {events.map((e) => (
+            <option key={e.id} value={e.name}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+
+        <div className="flex flex-wrap gap-3 mt-5">
+          <Button
+            variant="outline"
+            onClick={() => setOpen(true)}
+          >
+            <Eye />
+            View Sample
+          </Button>
+
+          {!student && (
+            <Button onClick={issueCertificates}>
+              <Award />
+              Issue Certificates
+            </Button>
+          )}
+        </div>
+
+        {message && (
+          <p className="text-sm mt-4" role="status">
+            {message}
+          </p>
+        )}
+
+        <div className="mt-6 space-y-3">
+          {visibleCertificates
+            .filter((c) => student || c.event === event)
+            .map((c) => (
+              <div
+                key={c.id}
+                className="dash-row"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm">
+                    {c.participant}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {c.event} · Issued {c.issued}
+                  </p>
+                </div>
+
+                {student && (
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      downloadCertificate(
+                        c.participant,
+                        c.event,
+                        c.issued
+                      )
+                    }
+                  >
+                    <Download size={15} />
+                    Download
+                  </Button>
+                )}
+              </div>
+            ))}
+        </div>
+      </Panel>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-2xl max-h-[90dvh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Certificate Preview</DialogTitle>
+            <DialogDescription>
+              Sample only · Not an issued university certificate
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="certificate-paper">
+            <UniversityBrand />
+
+            <p className="section-kicker mt-8">
+              Sample · Not issued
+            </p>
+
+            <h2 className="section-title">
+              Certificate of Participation
+            </h2>
+
+            <p className="text-sm text-muted-foreground mt-6">
+              This sample recognizes
+            </p>
+
+            <p className="dash-title mt-3">
+              {user?.name || 'Student Name'}
+            </p>
+
+            <p className="text-sm text-muted-foreground mt-5">
+              for participation in
+            </p>
+
+            <p className="text-lg font-semibold mt-2">
+              {event}
+            </p>
+
+            <div className="border-t border-border mt-8 pt-4 text-xs text-muted-foreground">
+              Attendance confirmation and authorized approval required.
+              This is a demonstration preview, not an official university certificate.
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
 }
